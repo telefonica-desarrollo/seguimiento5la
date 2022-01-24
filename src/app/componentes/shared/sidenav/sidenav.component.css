@@ -1,0 +1,18 @@
+.titulo:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    transition: 0.3s;
+    margin-left: 10px;
+}
+
+.titulo {
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    cursor: pointer;
+}
+
+.activeLink {
+    background-color: rgba(255, 255, 255, 1);
+    color: black;
+    margin-left: 15px;
+    transition: 0.1s;
+}

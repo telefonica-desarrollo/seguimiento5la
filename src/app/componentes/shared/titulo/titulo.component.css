@@ -1,5 +1,7 @@
-.titulo {
+.bg-titulo {
     /* background-color: rgba(0, 0, 0, 0.8); */
     /* padding: 15px; */
+    height: 12%;
     color: white;
+    background-color: #101e3b;
 }

@@ -12,6 +12,7 @@ import { FinalizadosComponent } from './componentes/finalizados/finalizados.comp
 import { ConfiguracionComponent } from './componentes/configuracion/configuracion.component';
 import { CargaComponent } from './componentes/carga/carga.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { RegistroComponent } from './componentes/registro/registro.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

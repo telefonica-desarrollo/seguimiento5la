@@ -1,11 +1,11 @@
-<div class="row p-3" style="background-color: rgba(250, 250, 250, 0.8);">
-    <div class="col text-center">
+<div class="row p-3" style="background-color: rgba(0, 0, 0, 0.5);">
+    <div class="col text-center text-white">
         <p class="lead mt-2">Proyecto 5la </p>
     </div>
 </div>
-<div class="row mt-2 p-3">
-    <div class="col text-white text-center  opacity-50">
-        <p class="lead" style="font-size: 30px; line-height: 32px;">CAC PLAZA SATELITE</p>
+<div class="row mt-2 px-2 pt-3 pb-1">
+    <div class="col text-white text-center ">
+        <p class="lead">CAC PLAZA SATELITE</p>
     </div>
 </div>
 <hr style="background-color: white;">
@@ -13,13 +13,13 @@
     <div class="col-12 mb-2 opacity-25">
         Registros:
     </div>
-    <div class="col-12 p-2 border my-1 rounded ps-3 mt-2">
+    <div [routerLink]="['/registros']" routerLinkActive="activeLink" class="col-12 p-2 titulo border my-1 rounded ps-3 mt-2">
         Nuevos Registros.
     </div>
-    <div class="col-12 p-2 border my-1 rounded ps-3">
+    <div [routerLink]="['/seguimiento']" routerLinkActive="activeLink" class="col-12 p-2 titulo border my-1 rounded ps-3">
         Seguimiento
     </div>
-    <div class="col-12 p-2 border my-1 rounded ps-3">
+    <div [routerLink]="['/finalizado']" routerLinkActive="activeLink" class="col-12 p-2 titulo border my-1 rounded ps-3">
         Finalizados
     </div>
 </div>
@@ -28,10 +28,10 @@
     <div class="col-12 mb-2 opacity-25">
         Pdv:
     </div>
-    <div class="col-12 p-2 border my-1 rounded ps-3">
+    <div [routerLink]="['/configuracion']" routerLinkActive="activeLink" class="col-12 p-2 titulo border my-1 rounded ps-3">
         Configuracion
     </div>
-    <div class="col-12 p-2 border my-1 rounded ps-3">
+    <div [routerLink]="['/carga']" routerLinkActive="activeLink" class="col-12 p-2 titulo border my-1 rounded ps-3">
         Carga de Informacion
     </div>
 </div>
