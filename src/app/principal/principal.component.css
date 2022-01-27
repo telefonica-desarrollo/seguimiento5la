@@ -1,0 +1,8 @@
+.bg-sidenav {
+    background-color: #101e3b;
+}
+
+.routerOutlet {
+    height: 88%;
+    overflow-y: scroll;
+}

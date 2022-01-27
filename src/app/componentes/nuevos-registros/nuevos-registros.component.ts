@@ -12,4 +12,49 @@ export class NuevosRegistrosComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  nombreColumnas= ["dn", "Atencion", "Fecha", "Seguimiento"]
+  data= [
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
+    
+  ]
+
+  hola(){
+    alert("hola")
+  }
+
 }

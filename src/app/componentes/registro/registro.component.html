@@ -1,1 +1,67 @@
-<p>registro works!</p>
+<div class="container">
+    <div class="row my-4 p-2 rounded shadow" style="background-color: rgba(0, 0, 0, 0.15);">
+        <h1 class="lead mt-2">Informacion</h1>
+        <div class="col-6">
+            <dl class="row">
+                <dt class="col-sm-3">Dn:</dt>
+                <dd class="col-sm-9">
+                    5527186850
+                </dd>
+
+                <dt class="col-sm-3">Tipo de Atencion</dt>
+                <dd class="col-sm-9">
+                    -----------
+                </dd>
+            </dl>
+        </div>
+        <div class="col-6">
+            <div class="row pe-3">
+                <a href="https://wa.me/525527186850" class="btn btn-success">Conversación</a>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2 justify-content-end">
+        <hr>
+        <p class="lead mb-3">¡Gracias por tu preferencia! En Movistar tenemos la mejor opción para renovar tu Smarthphone, SIN PAGO INICIAL y con los mejores descuentos. ven a tu tienda Movistar
+            <b>{{nombrePdv}}</b>, mi nombre es <b>{{nombreEjecutivo}}</b> y te atenderé para realizar tu proceso HOY MISMO.
+        </p>
+        <a href="https://wa.me/525527186850?text={{mensaje}}" (click)="status=1" *ngIf="status == 0" target="_blank" class="btn btn-success w-25 me-4">Enviar mensaje</a>
+        <p class="lead text-muted text-end" *ngIf="status > 0">Mensaje enviado...</p>
+        <hr>
+    </div>
+    <div class="row text-white p-4 rounded" *ngIf="status > 0" style="background-color: rgba(0, 0, 0, 0.8); ">
+        <div class="col lead ">
+            Respuesta del cliente:
+        </div>
+        <div class="col ">
+            <div class="form-check form-check-inline ">
+                <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox1" (change)="cambiar($event)" [(ngModel)]="primer_respuesta" [value]="2">
+                <label class="form-check-label " for="inlineCheckbox1 ">Positiva</label>
+            </div>
+            <div class="form-check form-check-inline ">
+                <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox2 " (change)="cambiar($event)" [(ngModel)]=" primer_respuesta" [value]="1">
+                <label class="form-check-label " for="inlineCheckbox2 ">Negativa</label>
+            </div>
+            <div class="form-check form-check-inline ">
+                <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox3 " (change)="cambiar($event)" [(ngModel)]=" primer_respuesta" [value]="0" [disabled]="primer_respuesta >0">
+                <label class="form-check-label " for="inlineCheckbox3 ">Sin responder</label>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5 justify-content-center " *ngIf="status==2 ">
+        <p class="lead mb-3 ">
+            ¡Muchas gracias por su interés! Le atendere personalmente para que conozca los mejores equipos y nuestros descuentos.
+            <br> ¿En que horario puede acudir el dia de hoy a Movistar <b>{{nombrePdv}}</b>?
+        </p>
+        <a href="https://wa.me/525562575417?text={{mensaje2}} " target="_blank " class="btn btn-success w-25 ">Enviar mensaje</a>
+        <hr>
+    </div>
+
+    <div class="row mt-5 justify-content-center " *ngIf="status==3 ">
+        <p class="lead mb-3 ">
+            En Movistar <b>{{nombrePdv}}</b> estamos para atenderte en un horario de XX:XX A XX:XX, tenemos grandes DESCUENTOS en los mejores Smarthphones, con gusto podemos brindarte más Información para que estrene HOY mismo! Nuestra ubicación es:
+        </p>
+        <a href="https://wa.me/525562575417?text={{mensaje3}} " target="_blank " class="btn btn-success w-25 ">Enviar mensaje</a>
+        <hr>
+    </div>
+</div>

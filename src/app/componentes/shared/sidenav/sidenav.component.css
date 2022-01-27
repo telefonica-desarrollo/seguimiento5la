@@ -16,3 +16,8 @@
     margin-left: 15px;
     transition: 0.1s;
 }
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}

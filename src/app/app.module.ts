@@ -14,6 +14,16 @@ import { CargaComponent } from './componentes/carga/carga.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { RouterModule } from '@angular/router';
 
+import {MatTableModule} from '@angular/material/table';
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { PrincipalComponent } from './principal/principal.component';
+
+
+const AngularMaterialModule = [
+  MatTableModule
+]
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,13 +34,17 @@ import { RouterModule } from '@angular/router';
     FinalizadosComponent,
     ConfiguracionComponent,
     CargaComponent,
-    RegistroComponent
+    RegistroComponent,
+    LoginComponent,
+    PrincipalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    RouterModule
+    RouterModule,
+    AngularMaterialModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

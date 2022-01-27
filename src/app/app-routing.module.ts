@@ -6,19 +6,26 @@ import { FinalizadosComponent } from './componentes/finalizados/finalizados.comp
 import { NuevosRegistrosComponent } from './componentes/nuevos-registros/nuevos-registros.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { SeguimientoComponent } from './componentes/seguimiento/seguimiento.component';
+import { LoginComponent } from './login/login.component';
+import { PrincipalComponent } from './principal/principal.component';
 
 const routes: Routes = [
-  {path: "registros", component: NuevosRegistrosComponent},
-  {path: "seguimiento", component: SeguimientoComponent},
-  {path: "finalizado", component: FinalizadosComponent},
-  {path: "seguimiento/:id", component: RegistroComponent},
+  
+  {path: "login", component: LoginComponent},
+  {path: "inicio", component: PrincipalComponent, children:[
+    {path: "registros", component: NuevosRegistrosComponent},
+    {path: "seguimiento", component: SeguimientoComponent},
+    {path: "finalizado", component: FinalizadosComponent},
+    {path: "seguimiento/:id", component: RegistroComponent},
+  
+    {path: "configuracion", component: ConfiguracionComponent},
+  ]},
+  {path: "**", redirectTo: "login"}
 
-  {path: "configuracion", component: ConfiguracionComponent},
-  {path: "cargar", component: CargaComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
