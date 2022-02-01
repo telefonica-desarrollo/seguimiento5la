@@ -1,42 +1,83 @@
 <div class="container">
-    <div class="row my-4 p-2 rounded shadow" style="background-color: rgba(0, 0, 0, 0.15);">
-        <h1 class="lead mt-2">Informacion</h1>
-        <div class="col-6">
+    <div class="row my-4 p-2 align-items-center justify-content-around px-3">
+        <div class="col-7 rounded" style="background-color: rgba(0, 0, 0, 0.1);">
+            <h1 class="lead mt-2">Informacion</h1>
             <dl class="row">
                 <dt class="col-sm-3">Dn:</dt>
                 <dd class="col-sm-9">
-                    5527186850
+                    {{Registro.DN}}
+                </dd>
+                <dt class="col-sm-3">Fecha de visita</dt>
+                <dd class="col-sm-9">
+                    {{Registro.FECHA_VISITA | date:"longDate"}}
+                </dd>
+                <dt class="col-sm-3">Nombre</dt>
+                <dd class="col-sm-9">
+                    {{Registro.NOMBRE_CLIENTE}}
                 </dd>
 
-                <dt class="col-sm-3">Tipo de Atencion</dt>
-                <dd class="col-sm-9">
-                    -----------
-                </dd>
             </dl>
         </div>
-        <div class="col-6">
-            <div class="row pe-3">
-                <a href="https://wa.me/525527186850" class="btn btn-success">Conversación</a>
+        <div class="col-5">
+            <div class="row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Status del seguimiento</mat-label>
+                    <mat-select [(value)]="statusRegistro">
+                        <mat-option>None</mat-option>
+                        <mat-option value="0" disabled>Registro sin contactar</mat-option>
+                        <mat-option value="1" disabled>Registro contactado</mat-option>
+                        <mat-option value="2">Registro pendiente</mat-option>
+                        <mat-option value="3">Registro con cita</mat-option>
+                        <mat-option value="4">Registro finalizado</mat-option>
+                        <mat-option value="4">Registro con dn incorrecto</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row px-3">
+                <a href="https://wa.me/+52{{Registro.DN}}" class="btn btn-success">Ver conversación</a>
             </div>
         </div>
     </div>
-    <div class="row mt-2 justify-content-end">
-        <hr>
-        <p class="lead mb-3">¡Gracias por tu preferencia! En Movistar tenemos la mejor opción para renovar tu Smarthphone, SIN PAGO INICIAL y con los mejores descuentos. ven a tu tienda Movistar
-            <b>{{nombrePdv}}</b>, mi nombre es <b>{{nombreEjecutivo}}</b> y te atenderé para realizar tu proceso HOY MISMO.
-        </p>
-        <a href="https://wa.me/525527186850?text=" (click)="status=1" *ngIf="status == 0" target="_blank" class="btn btn-success w-25 me-4">Enviar mensaje</a>
-        <p class="lead text-muted text-end" *ngIf="status > 0">Mensaje enviado...</p>
-        <hr>
-    </div>
     <div class="row">
-        <div class="col-5">
-            <img src="/assets/perro.jpg" class="img-fluid" id="perrito">
-        </div>
-        <div class="col-7">
-            <button class="btn btn-primary" (click)="CopiarImagen()">Copiar Imagen</button>
-        </div>
+        <mat-accordion>
+            <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Contactar al cliente
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <!-- Aqui un mensaje como listo -->
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="row mt-2 align-items-center">
+                    <div class="col-4">
+                        <!-- <img src="/assets/perro.jpg" class="img-fluid" id="perrito"> -->
+                        <img src="https://image.isu.pub/200910140942-f11811f40c5b929ca8a5df2e980eec11/jpg/page_1.jpg" alt="" class="img-fluid">
+                    </div>
+                    <div class="col-8">
+                        <hr>
+                        <p class="lead mb-3">{{mensaje}}
+                        </p>
+                        <a href="https://wa.me/525527186850?text={{mensaje}}" (click)="status=1" *ngIf="status == 0" target="_blank" class="btn btn-success w-25 me-4">Enviar mensaje</a>
+                        <p class="lead text-muted text-end" *ngIf="status > 0">Mensaje enviado...</p>
+                        <hr>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Self aware panel
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <p>I'm visible because I am open</p>
+            </mat-expansion-panel>
+        </mat-accordion>
     </div>
+
     <div class="row text-white p-4 rounded" *ngIf="status > 0" style="background-color: rgba(0, 0, 0, 0.8); ">
         <div class="col lead ">
             Respuesta del cliente:

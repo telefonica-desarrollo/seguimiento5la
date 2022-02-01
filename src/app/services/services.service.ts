@@ -27,6 +27,14 @@ export class ServicesService {
       })
     )
   }
+  registroInformacion(data: any): Observable <REGISTRO>{
+    return this.http.post(`${this.ruta}/registro`, {ID_REGISTRO: data}).pipe(
+      map( (data: any) => {
+        data.FECHA_VISITA = new Date(data.FECHA_VISITA).toISOString()
+        return data
+      })
+    )
+  }
   registrosConSeguimiento(data: any){
     return this.http.post(`${this.ruta}/registros`, data)
   }

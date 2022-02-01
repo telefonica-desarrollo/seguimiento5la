@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-registro',
@@ -8,7 +9,21 @@ import { Router } from '@angular/router';
 })
 export class RegistroComponent implements OnInit {
 
-  constructor(private router: Router) { 
+  Registro: any = [];
+  ID_REGISTRO: any = "";
+  statusRegistro: any = "0";
+
+  panelOpenState = false;
+  selected = "option2"
+  
+  constructor(private router: Router, private service: ServicesService, private rutaActiva: ActivatedRoute) { 
+    this.rutaActiva.params.subscribe((parametros) => {
+      this.service.registroInformacion(parametros.id).subscribe((res: any) => {
+        console.log(res);
+        this.Registro = res;
+      })
+    })
+
     this.nombreEjecutivo = "NOMBRE EJECUTIVO"
     this.nombrePdv = "CAC Ejemplo"
     if(this.status == 2) this.primer_respuesta = 2
