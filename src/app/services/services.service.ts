@@ -11,7 +11,8 @@ export class ServicesService {
 
   constructor(private http: HttpClient ) { }
 
-  ruta: string = "http://localhost:3000"
+  // ruta: string = "http://localhost:3000"
+  ruta: string = "http://200.36.165.51:3000/"
 
   login(data: any){
     return this.http.post(`${this.ruta}/login`, data)
