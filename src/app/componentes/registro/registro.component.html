@@ -25,9 +25,17 @@
         <p class="lead mb-3">¡Gracias por tu preferencia! En Movistar tenemos la mejor opción para renovar tu Smarthphone, SIN PAGO INICIAL y con los mejores descuentos. ven a tu tienda Movistar
             <b>{{nombrePdv}}</b>, mi nombre es <b>{{nombreEjecutivo}}</b> y te atenderé para realizar tu proceso HOY MISMO.
         </p>
-        <a href="https://wa.me/525527186850?text={{mensaje}}" (click)="status=1" *ngIf="status == 0" target="_blank" class="btn btn-success w-25 me-4">Enviar mensaje</a>
+        <a href="https://wa.me/525527186850?text=" (click)="status=1" *ngIf="status == 0" target="_blank" class="btn btn-success w-25 me-4">Enviar mensaje</a>
         <p class="lead text-muted text-end" *ngIf="status > 0">Mensaje enviado...</p>
         <hr>
+    </div>
+    <div class="row">
+        <div class="col-5">
+            <img src="/assets/perro.jpg" class="img-fluid" id="perrito">
+        </div>
+        <div class="col-7">
+            <button class="btn btn-primary" (click)="CopiarImagen()">Copiar Imagen</button>
+        </div>
     </div>
     <div class="row text-white p-4 rounded" *ngIf="status > 0" style="background-color: rgba(0, 0, 0, 0.8); ">
         <div class="col lead ">

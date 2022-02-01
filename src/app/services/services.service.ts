@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http"
 import { map } from "rxjs/operators"
 import { Observable } from 'rxjs';
 import { REGISTRO } from '../interfaces/seguimiento5la.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,7 @@ export class ServicesService {
 
   constructor(private http: HttpClient ) { }
 
-  // ruta: string = "http://localhost:3000"
-  ruta: string = "https://backtemm.teknei.com"
+  ruta: string = environment.rutaApi
 
   login(data: any){
     return this.http.post(`${this.ruta}/login`, data)

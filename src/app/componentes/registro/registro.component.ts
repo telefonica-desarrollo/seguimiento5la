@@ -29,6 +29,9 @@ export class RegistroComponent implements OnInit {
     if(this.primer_respuesta == 1) this.status = 3
   }
 
+  CopiarImagen(){
+  }
+
 
   status: number = 0;
   mensaje= ""
