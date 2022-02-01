@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -7,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidenavComponent implements OnInit {
 
-  constructor() { }
+  informacionTienda = {ID_TIENDA: " ", NOMBRE_TIENDA: ""}
+  constructor(private service: ServicesService) {
+    this.informacionTienda.ID_TIENDA = localStorage.getItem("ID_TIENDA") || ""
+    this.service.informacionTienda(this.informacionTienda).subscribe((res: any) => {
+      this.informacionTienda.NOMBRE_TIENDA = res.NOMBRE_TIENDA
+    })
+   }
 
   ngOnInit(): void {
   }
-  disabled= true;
 
 }
