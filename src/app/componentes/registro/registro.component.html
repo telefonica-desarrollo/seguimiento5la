@@ -60,13 +60,13 @@
                         <hr>
                         <p class="lead mb-3">{{mensajeInicio}}
                         </p>
-                        <button class="btn btn-success shadow d-flex ms-auto px-2" *ngIF="statusRegistro<1" (click)="EnviarMensajeInicio(mensajeInicio, 1)"> Enviar Mensaje</button>
+                        <button class="btn btn-success shadow d-flex ms-auto px-2" *ngIf="statusRegistro<1" (click)="EnviarMensajeInicio(mensajeInicio, 1)"> Enviar Mensaje</button>
                         <p class="lead text-muted text-end" *ngIf="statusRegistro > 0">Mensaje enviado...</p>
                         <hr>
                     </div>
                 </div>
             </mat-expansion-panel>
-            <mat-expansion-panel>
+            <mat-expansion-panel [disabled]="statusRegistro<1">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         Primer Respuesta
