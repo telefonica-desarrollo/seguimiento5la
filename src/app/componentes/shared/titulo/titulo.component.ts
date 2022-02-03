@@ -11,6 +11,7 @@ export class TituloComponent implements OnInit {
   NOMBRE_USUARIO: any = ""
   constructor(private service: ServicesService) { 
     this.NOMBRE_USUARIO = localStorage.getItem("NOMBRE_USUARIO")
+    localStorage.setItem("NOMBRE_USUARIO", this.NOMBRE_USUARIO)
   }
 
   ngOnInit(): void {

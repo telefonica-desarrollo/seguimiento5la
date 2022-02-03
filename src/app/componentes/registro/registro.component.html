@@ -23,13 +23,13 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Status del seguimiento</mat-label>
                     <mat-select [(value)]="statusRegistro">
-                        <mat-option>None</mat-option>
-                        <mat-option value="0" disabled>Registro sin contactar</mat-option>
-                        <mat-option value="1" disabled>Registro contactado</mat-option>
-                        <mat-option value="2">Registro pendiente</mat-option>
-                        <mat-option value="3">Registro con cita</mat-option>
-                        <mat-option value="4">Registro finalizado</mat-option>
-                        <mat-option value="4">Registro con dn incorrecto</mat-option>
+                        <mat-option value="0" disabled>Sin contactar</mat-option>
+                        <mat-option value="1" disabled>Contacto iniciado</mat-option>
+                        <mat-option value="2">Pendiente</mat-option>
+                        <mat-option value="3">Con cita</mat-option>
+                        <mat-option value="4">Finalizado</mat-option>
+                        <mat-option value="4">Dn incorrecto</mat-option>
+                        <mat-option value="4">Comportamiento agresivo</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -40,63 +40,75 @@
     </div>
     <div class="row">
         <mat-accordion>
-            <mat-expansion-panel hideToggle>
+            <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        Contactar al cliente
+                        Iniciar conversación
                     </mat-panel-title>
                     <mat-panel-description>
-                        <!-- Aqui un mensaje como listo -->
+                        <div *ngIf="statusRegistro > 0">
+                            El cliente ha sido contactado!
+                        </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div class="row mt-2 align-items-center">
                     <div class="col-4">
-                        <!-- <img src="/assets/perro.jpg" class="img-fluid" id="perrito"> -->
                         <img src="https://image.isu.pub/200910140942-f11811f40c5b929ca8a5df2e980eec11/jpg/page_1.jpg" alt="" class="img-fluid">
                     </div>
                     <div class="col-8">
+                        <h1>Iniciar conversación</h1>
                         <hr>
-                        <p class="lead mb-3">{{mensaje}}
+                        <p class="lead mb-3">{{mensajeInicio}}
                         </p>
-                        <a href="https://wa.me/525527186850?text={{mensaje}}" (click)="status=1" *ngIf="status == 0" target="_blank" class="btn btn-success w-25 me-4">Enviar mensaje</a>
-                        <p class="lead text-muted text-end" *ngIf="status > 0">Mensaje enviado...</p>
+                        <button class="btn btn-success shadow d-flex ms-auto px-2" *ngIF="statusRegistro<1" (click)="EnviarMensajeInicio(mensajeInicio, 1)"> Enviar Mensaje</button>
+                        <p class="lead text-muted text-end" *ngIf="statusRegistro > 0">Mensaje enviado...</p>
                         <hr>
                     </div>
                 </div>
             </mat-expansion-panel>
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        Self aware panel
+                        Primer Respuesta
                     </mat-panel-title>
                     <mat-panel-description>
-                        Currently I am {{panelOpenState ? 'open' : 'closed'}}
+
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <p>I'm visible because I am open</p>
+                <div class="row text-white p-4 rounded" style="background-color: rgba(0, 0, 0, 0.8); ">
+                    <div class="col lead ">
+                        Respuesta del cliente:
+                    </div>
+                    <div class="col ">
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox1" (change)="cambiar($event)" [(ngModel)]="primer_respuesta" [value]="2">
+                            <label class="form-check-label " for="inlineCheckbox1 ">Positiva</label>
+                        </div>
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox2 " (change)="cambiar($event)" [(ngModel)]=" primer_respuesta" [value]="1">
+                            <label class="form-check-label " for="inlineCheckbox2 ">Negativa</label>
+                        </div>
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox3 " (change)="cambiar($event)" [(ngModel)]=" primer_respuesta" [value]="0" [disabled]="primer_respuesta >0">
+                            <label class="form-check-label " for="inlineCheckbox3 ">Sin responder</label>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+
+                    </mat-panel-title>
+                    <mat-panel-description>
+
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
             </mat-expansion-panel>
         </mat-accordion>
     </div>
 
-    <div class="row text-white p-4 rounded" *ngIf="status > 0" style="background-color: rgba(0, 0, 0, 0.8); ">
-        <div class="col lead ">
-            Respuesta del cliente:
-        </div>
-        <div class="col ">
-            <div class="form-check form-check-inline ">
-                <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox1" (change)="cambiar($event)" [(ngModel)]="primer_respuesta" [value]="2">
-                <label class="form-check-label " for="inlineCheckbox1 ">Positiva</label>
-            </div>
-            <div class="form-check form-check-inline ">
-                <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox2 " (change)="cambiar($event)" [(ngModel)]=" primer_respuesta" [value]="1">
-                <label class="form-check-label " for="inlineCheckbox2 ">Negativa</label>
-            </div>
-            <div class="form-check form-check-inline ">
-                <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox3 " (change)="cambiar($event)" [(ngModel)]=" primer_respuesta" [value]="0" [disabled]="primer_respuesta >0">
-                <label class="form-check-label " for="inlineCheckbox3 ">Sin responder</label>
-            </div>
-        </div>
-    </div>
+
     <div class="row mt-5 justify-content-center " *ngIf="status==2 ">
         <p class="lead mb-3 ">
             ¡Muchas gracias por su interés! Le atendere personalmente para que conozca los mejores equipos y nuestros descuentos.

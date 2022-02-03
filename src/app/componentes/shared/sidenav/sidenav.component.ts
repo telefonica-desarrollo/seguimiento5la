@@ -13,6 +13,7 @@ export class SidenavComponent implements OnInit {
     this.informacionTienda.ID_TIENDA = localStorage.getItem("ID_TIENDA") || ""
     this.service.informacionTienda(this.informacionTienda).subscribe((res: any) => {
       this.informacionTienda.NOMBRE_TIENDA = res.NOMBRE_TIENDA
+      localStorage.setItem("NOMBRE_TIENDA", res.NOMBRE_TIENDA)
     })
    }
 
