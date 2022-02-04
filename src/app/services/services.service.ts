@@ -36,13 +36,24 @@ export class ServicesService {
     )
   }
   registrosConSeguimiento(data: any){
-    return this.http.post(`${this.ruta}/registros`, data)
+    return this.http.post(`${this.ruta}/registros`, {ID_USUARIO: data}).pipe(
+      map( (data: any) => {
+        data.map((registrodb: REGISTRO) => {
+          registrodb.FECHA_VISITA = new Date(registrodb.FECHA_VISITA).toISOString()
+        })
+        return data
+      })
+    )
   }
   registroIniciarSeguimiento(data: any){
     return this.http.post(`${this.ruta}/registro/iniciar/seguimiento`, data)
   }
   registroSeguimientoStatus(data: any){
     return this.http.post(`${this.ruta}/registro/seguimiento/status`, data)
+  }
+  registroSeguimientoPrimerRespuesta(data: any){
+    // p-respuesta
+    return this.http.post(`${this.ruta}/registro/seguimiento/p-respuesta`, data)
   }
   registroSeguimientoInformacion(data: any){
     return this.http.post(`${this.ruta}/registro/seguimiento/informacion`, data)

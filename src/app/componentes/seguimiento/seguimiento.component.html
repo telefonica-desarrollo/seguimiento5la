@@ -1,23 +1,29 @@
 <div class="container">
-    <div class="row pb-5">
+    <div class="row p-5" *ngIf="cargandoData">
+        CARGANDO
+    </div>
+    <div class="row p-5" *ngIf="!cargandoData && Registros.length == 0">
+        Sin registros
+    </div>
+    <div class="row pb-5" *ngIf="Registros.length > 0">
         <div class="col">
-            <table mat-table [dataSource]="data" class="mat-elevation-z1 mt-3">
+            <table mat-table [dataSource]="Registros" class="mat-elevation-z1 mt-3">
                 <ng-container matColumnDef="dn">
-                    <th mat-header-cell *matHeaderCellDef class="text-center">DN </th>
-                    <td mat-cell *matCellDef="let user"> {{user.dn}} </td>
+                    <th mat-header-cell *matHeaderCellDef class="text-center ">DN </th>
+                    <td mat-cell *matCellDef="let registro "> {{registro.DN}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Atencion">
-                    <th mat-header-cell *matHeaderCellDef class="text-center">Atencion </th>
-                    <td mat-cell *matCellDef="let user"> {{user.Atencion}} </td>
+                    <th mat-header-cell *matHeaderCellDef class="text-center ">Atencion </th>
+                    <td mat-cell *matCellDef="let registro "> {{registro.TIPO_ATENCION}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Fecha">
-                    <th mat-header-cell *matHeaderCellDef class="text-center">Fecha </th>
-                    <td mat-cell *matCellDef="let user"> {{user.Fecha}} </td>
+                    <th mat-header-cell *matHeaderCellDef class="text-center ">Fecha </th>
+                    <td mat-cell *matCellDef="let registro "> {{registro.FECHA_VISITA | date: "longDate"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Seguimiento">
                     <th mat-header-cell *matHeaderCellDef class="text-center">Seguimiento </th>
-                    <td mat-cell *matCellDef="let user" class="py-2">
-                        <button class="btn btn-secondary" routerLink="/inicio/seguimiento/1">Ver Seguimiento</button>
+                    <td mat-cell *matCellDef="let registro" class="py-2">
+                        <button class="btn btn-secondary" routerLink="/inicio/seguimiento/{{registro.ID_REGISTRO}}">Ver Seguimiento</button>
                     </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="nombreColumnas"></tr>

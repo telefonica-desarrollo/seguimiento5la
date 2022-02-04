@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { REGISTRO } from 'src/app/interfaces/seguimiento5la.interface';
 import { ServicesService } from 'src/app/services/services.service';
 
-
+ 
 
 @Component({
   selector: 'app-nuevos-registros',
@@ -12,6 +12,7 @@ import { ServicesService } from 'src/app/services/services.service';
 
 export class NuevosRegistrosComponent implements OnInit {
 
+  nombreColumnas= ["dn", "Atencion", "Fecha", "Seguimiento"]
   ID_TIENDA: any = ""
   cargandoData: boolean = true
   Registros: REGISTRO [] = []
@@ -27,51 +28,6 @@ export class NuevosRegistrosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  nombreColumnas= ["dn", "Atencion", "Fecha", "Seguimiento"]
-  data= [
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    
-  ]
-
-  hola(){
-    alert("hola")
   }
 
 }

@@ -25,11 +25,10 @@
                     <mat-select [(value)]="statusRegistro">
                         <mat-option value="0" disabled>Sin contactar</mat-option>
                         <mat-option value="1" disabled>Contacto iniciado</mat-option>
-                        <mat-option value="2">Pendiente</mat-option>
-                        <mat-option value="3">Con cita</mat-option>
-                        <mat-option value="4">Finalizado</mat-option>
-                        <mat-option value="4">Dn incorrecto</mat-option>
-                        <mat-option value="4">Comportamiento agresivo</mat-option>
+                        <mat-option value="2" disabled>Pendiente</mat-option>
+                        <mat-option value="3" disabled>Finalizado</mat-option>
+                        <mat-option value="5" disabled>Dn incorrecto</mat-option>
+                        <mat-option value="6" disabled>Comportamiento agresivo</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -40,6 +39,7 @@
     </div>
     <div class="row">
         <mat-accordion>
+            <!-- Iniciar contacto -->
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
@@ -66,13 +66,14 @@
                     </div>
                 </div>
             </mat-expansion-panel>
+            <!-- Primer Respuesta -->
             <mat-expansion-panel [disabled]="statusRegistro<1">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         Primer Respuesta
                     </mat-panel-title>
                     <mat-panel-description>
-
+                        {{statusTextoPrimerMensaje}}
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div class="row text-white p-4 rounded" style="background-color: rgba(0, 0, 0, 0.8); ">
@@ -81,24 +82,59 @@
                     </div>
                     <div class="col ">
                         <div class="form-check form-check-inline ">
-                            <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox1" (change)="cambiar($event)" [(ngModel)]="primer_respuesta" [value]="2">
+                            <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox1" (change)="PimerRespuesta()" [(ngModel)]="statusPrimerMensaje" [value]="2" [disabled]="statusPrimerMensaje==1">
                             <label class="form-check-label " for="inlineCheckbox1 ">Positiva</label>
                         </div>
                         <div class="form-check form-check-inline ">
-                            <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox2 " (change)="cambiar($event)" [(ngModel)]=" primer_respuesta" [value]="1">
+                            <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox2 " (change)="PimerRespuesta()" [(ngModel)]=" statusPrimerMensaje" [value]="1" [disabled]="statusPrimerMensaje==2">
                             <label class="form-check-label " for="inlineCheckbox2 ">Negativa</label>
                         </div>
                         <div class="form-check form-check-inline ">
-                            <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox3 " (change)="cambiar($event)" [(ngModel)]=" primer_respuesta" [value]="0" [disabled]="primer_respuesta >0">
-                            <label class="form-check-label " for="inlineCheckbox3 ">Sin responder</label>
+                            <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox3 " (change)="PimerRespuesta()" [(ngModel)]=" statusPrimerMensaje" [value]="0" [disabled]="statusPrimerMensaje>0">
+                            <label class="form-check-label " for="inlineCheckbox3 ">Sin respuesta</label>
                         </div>
                     </div>
                 </div>
+                <hr>
+                <div class="row mt-2" *ngIf="statusPrimerMensaje==1">
+                    <div class="col-12 my-3">
+                        {{mensajeRespuestaNegativa}}
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-success shadow d-flex ms-auto px-2" *ngIf="statusRegistro<2" (click)="EnviarMensajeInicio(mensajeRespuestaNegativa, 2)"> Enviar Mensaje</button>
+                        <p class="lead text-muted text-end" *ngIf="statusRegistro > 1">Mensaje enviado...</p>
+                    </div>
+                </div>
+                <div class="row mt-2" *ngIf="statusPrimerMensaje==2">
+                    <div class="col-12 my-3">
+                        {{mensajeRespuestaPositiva}}
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-success shadow d-flex ms-auto px-2" *ngIf="statusRegistro<2" (click)="EnviarMensajeInicio(mensajeRespuestaPositiva, 2)"> Enviar Mensaje</button>
+                        <p class="lead text-muted text-end" *ngIf="statusRegistro > 1">Mensaje enviado...</p>
+                    </div>
+                </div>
             </mat-expansion-panel>
+            <!-- Finalizar -->
+            <mat-expansion-panel [disabled]="statusRegistro<2">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Finalizar
+                    </mat-panel-title>
+                    <mat-panel-description>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <div class="col-6">
+
+                    </div>
+                </div>
+            </mat-expansion-panel>
+            <!-- Levantar reporte -->
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-
+                        Levantar reporte
                     </mat-panel-title>
                     <mat-panel-description>
 
@@ -106,23 +142,5 @@
                 </mat-expansion-panel-header>
             </mat-expansion-panel>
         </mat-accordion>
-    </div>
-
-
-    <div class="row mt-5 justify-content-center " *ngIf="status==2 ">
-        <p class="lead mb-3 ">
-            ¡Muchas gracias por su interés! Le atendere personalmente para que conozca los mejores equipos y nuestros descuentos.
-            <br> ¿En que horario puede acudir el dia de hoy a Movistar <b>{{nombrePdv}}</b>?
-        </p>
-        <a href="https://wa.me/525562575417?text={{mensaje2}} " target="_blank " class="btn btn-success w-25 ">Enviar mensaje</a>
-        <hr>
-    </div>
-
-    <div class="row mt-5 justify-content-center " *ngIf="status==3 ">
-        <p class="lead mb-3 ">
-            En Movistar <b>{{nombrePdv}}</b> estamos para atenderte en un horario de XX:XX A XX:XX, tenemos grandes DESCUENTOS en los mejores Smarthphones, con gusto podemos brindarte más Información para que estrene HOY mismo! Nuestra ubicación es:
-        </p>
-        <a href="https://wa.me/525562575417?text={{mensaje3}} " target="_blank " class="btn btn-success w-25 ">Enviar mensaje</a>
-        <hr>
     </div>
 </div>

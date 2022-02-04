@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ServicesService } from 'src/app/services/services.service';
+
 
 @Component({
   selector: 'app-seguimiento',
@@ -8,56 +10,23 @@ import { Router } from '@angular/router';
 })
 export class SeguimientoComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  nombreColumnas= ["dn", "Atencion", "Fecha", "Seguimiento"]
+  ID_TIENDA: any = ""
+  ID_USUARIO: any = ""
+  cargandoData: boolean = true
+  Registros: any = []
+
+  constructor(private service: ServicesService) { 
+    this.ID_TIENDA = localStorage.getItem("ID_TIENDA")
+    this.ID_USUARIO = localStorage.getItem("ID_USUARIO")
+
+    this.service.registrosConSeguimiento(this.ID_USUARIO).subscribe((res) => {
+      this.Registros = res;
+      this.cargandoData = false
+    })
+  }
 
   ngOnInit(): void {
-  }
-  nombreColumnas= ["dn", "Atencion", "Fecha", "Seguimiento"]
-  data= [
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    {dn: 55252415, Atencion: "Alta", Fecha: "15/09/2022"},
-    
-  ]
-
-  hola(){
-    alert("hola")
-  }
-  seguimiento(){
-    this.router.navigate(["inicio/seguimiento/1"])
   }
 
 }

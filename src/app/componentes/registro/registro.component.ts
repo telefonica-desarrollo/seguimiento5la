@@ -11,12 +11,17 @@ import Swal from 'sweetalert2'
 export class RegistroComponent implements OnInit {
 
   Registro: any = [];
-  statusRegistro: any = "";
   
+  //LocalStorage
   ID_REGISTRO: any = "";
   ID_USUARIO: any = "";
   NOMBRE_EJECUTIVO: string =""
   NOMBRE_TIENDA: string =""
+  
+  //Vaiables del componente
+  statusRegistro: any = "";
+  statusPrimerMensaje: number = 0;
+  statusTextoPrimerMensaje: string = "Sin respuesta"
   
   mensajeInicio: string = "";
   mensajeRespuestaPositiva: string ="";
@@ -29,6 +34,11 @@ export class RegistroComponent implements OnInit {
         console.log(res);
         this.Registro = res;
         this.statusRegistro = `${this.Registro.STATUS}`
+
+        this.statusPrimerMensaje = this.Registro.PRIMER_RESPUESTA
+        if(this.statusPrimerMensaje == 1) this.statusTextoPrimerMensaje = "Negativa"
+        if(this.statusPrimerMensaje == 2) this.statusTextoPrimerMensaje = "Positiva"
+
       })
     })
     this.NOMBRE_EJECUTIVO = localStorage.getItem("NOMBRE_USUARIO") || "";
@@ -48,7 +58,7 @@ export class RegistroComponent implements OnInit {
     this.mensajeRespuestaPositiva =  `¡Muchas gracias por su interés! Le atendere personalmente para que conozca los mejores equipos y nuestros descuentos.
                                      \n ¿En que horario puede acudir el dia de hoy a Movistar ${this.NOMBRE_TIENDA}?`
 
-    this.mensajeRespuestaNegativa = `En Movistar ${this.nombrePdv} estamos para atenderte. Que tenga un excelente día.`
+    this.mensajeRespuestaNegativa = `En Movistar ${this.NOMBRE_TIENDA} estamos para atenderte. Que tenga un excelente día.`
   }
 
   EnviarMensajeInicio(mensaje: any, status: any){
@@ -66,7 +76,6 @@ export class RegistroComponent implements OnInit {
       cancelButtonText: "Cancelar"
     }).then((result) => {
       if (result.isConfirmed) {
-
         Swal.fire({
           allowOutsideClick: false,
           icon: "info",
@@ -81,6 +90,12 @@ export class RegistroComponent implements OnInit {
             this.statusRegistro = `${status}`
             this.Registro.STATUS = status
             Swal.close()
+            Swal.fire({
+              icon: 'success',
+              title: 'Cambio realizado',
+              showConfirmButton: false,
+              timer: 1500
+            })
           }
         )
         //AGREGAMOS REGISTRO AL INICIAR CONTACTO
@@ -91,19 +106,44 @@ export class RegistroComponent implements OnInit {
     })
   }
 
-  cambiar(e: any){
+  PimerRespuesta(){
+    Swal.fire({
+      allowOutsideClick: false,
+      title: "¿Continuar con lo solicitado?",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: 'success',
+      cancelButtonColor: 'danger',
+      confirmButtonText: 'Continuar',
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if(this.statusPrimerMensaje == 1) this.statusTextoPrimerMensaje = "Negativa"
+        if(this.statusPrimerMensaje == 2) this.statusTextoPrimerMensaje = "Positiva"
+        Swal.fire({
+          allowOutsideClick: false,
+          icon: "info",
+          text: "Cargando"
+        })
+        Swal.showLoading();
+
+        //CAMBIAMOS STATUS DEL REGISTRO
+        this.service.registroSeguimientoPrimerRespuesta({ID_REGISTRO: this.ID_REGISTRO, PRIMER_RESPUESTA: this.statusPrimerMensaje}).subscribe(
+          (res)=>{
+            console.log(res)
+            Swal.close()
+              Swal.fire({
+                icon: 'success',
+                title: 'Cambio realizado',
+                showConfirmButton: false,
+                timer: 1500
+              })
+          }
+        )
+      }else{
+        this.statusPrimerMensaje = 0
+      }
+    })
   }
 
-  CopiarImagen(){
-  }
-
-
-  status: number = 0;
-  mensaje= ""
-  mensaje2 =""
-  mensaje3=""
-
-  primer_respuesta = 0
-  nombreEjecutivo= " ";
-  nombrePdv = " "
 }
