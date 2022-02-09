@@ -15,8 +15,8 @@ const routes: Routes = [
   {path: "inicio", component: PrincipalComponent, children:[
     {path: "registros", component: NuevosRegistrosComponent},
     {path: "seguimiento", component: SeguimientoComponent},
-    {path: "finalizado", component: FinalizadosComponent},
     {path: "seguimiento/:id", component: RegistroComponent},
+    {path: "cargar", component: CargaComponent},
   
     {path: "configuracion", component: ConfiguracionComponent},
   ]},

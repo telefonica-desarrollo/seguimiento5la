@@ -52,7 +52,6 @@ export class ServicesService {
     return this.http.post(`${this.ruta}/registro/seguimiento/status`, data)
   }
   registroSeguimientoPrimerRespuesta(data: any){
-    // p-respuesta
     return this.http.post(`${this.ruta}/registro/seguimiento/p-respuesta`, data)
   }
   registroSeguimientoInformacion(data: any){
@@ -60,6 +59,12 @@ export class ServicesService {
   }
   informacionTienda(data: any){
     return this.http.post(`${this.ruta}/tienda`, data)
+  }
+  cargartiendas(data: any){
+    return this.http.post(`${this.ruta}/cargar/tiendas`, data)
+  }
+  cargarregistros(data: any){
+    return this.http.post(`${this.ruta}/cargar/registros`, data)
   }
 
 }
