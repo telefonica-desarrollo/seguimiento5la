@@ -1,27 +1,7 @@
 <div class="container">
-    <h1>Cargar registros</h1>
-    <div class="row mt-4">
-        <div class="col-12">
-            <input type="file" name="data" id="data" (change)="leerArchivo($event)">
-        </div>
-        <div class="col-12 my-3">
-            Info del archivo
-            <div class="row" *ngIf="cargando">
-                cargando...
-            </div>
-            <div class="row" *ngIf="!cargando">
-                <div class="col-12">Cantidad de lineas: {{lineasDocumento}}</div>
-                <div class="col-12">Cantidad de numero [mayor 8 digitos]: {{lineasNumeroCorrecto}}</div>
-                <div class="col-12">Resumen de carga ---> [{{registrosCargados}} de {{Registros.length}}]</div>
-            </div>
-        </div>
-        <div class="col-12 mt-2">
-            <button class="btn btn-primary" (click)="guardar()">Guardar Info</button>
-        </div>
-    </div>
-    <hr>
+    <hr class="mt-4">
     <h1>Cargar tiendas</h1>
-    <div class="row mt-4">
+    <div class="row mt-4 p-3">
         <div class="col-12">
             <input type="file" name="data" id="data" (change)="leerArchivoTiendas($event)">
         </div>

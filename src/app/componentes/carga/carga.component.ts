@@ -24,34 +24,6 @@ export class CargaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  leerArchivo(event: any){
-    this.cargando = true
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.readAsArrayBuffer(file)
-    reader.onload = () => {
-      const buffer: any = reader.result;
-      let woorkbook = new Exceljs.Workbook();
-      
-      woorkbook.xlsx.load(buffer).then((err)=>{
-        var woorksheet = woorkbook.getWorksheet(0);
-        woorksheet.eachRow((row, rowNumber) => {
-          if(rowNumber>1){
-            const dn =  row.getCell(18).value
-            this.lineasDocumento++
-          }
-        })
-      }).finally(()=>{
-        console.log(this.lineasDocumento);
-        this.cargando = false
-      })
-    }
-    
-  }
-  guardar(){
-    
-  }
   //Para tiendas
   leerArchivoTiendas(event: any){
     const file = event.target.files[0];
@@ -71,6 +43,10 @@ export class CargaComponent implements OnInit {
               let tienda: any = {}
               tienda.IDPDV = id
               tienda.NOMBRE_TIENDA = row.getCell(15).value?.toString()
+              tienda.SOCIO_COMERCIAL = row.getCell(16).value?.toString()
+              tienda.TERRITORIO = row.getCell(1).value?.toString()
+              tienda.ESTADO = row.getCell(33).value?.toString()
+
               this.Tiendas.push(tienda)
             }
           }

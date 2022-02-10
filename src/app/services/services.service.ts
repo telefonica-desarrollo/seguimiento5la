@@ -18,11 +18,8 @@ export class ServicesService {
     return this.http.post(`${this.ruta}/login`, data)
   }
   registrosNuevos(data: any): Observable <REGISTRO []>{
-    return this.http.post(`${this.ruta}/registros/nuevos`, {ID_TIENDA: data}).pipe(
+    return this.http.post(`${this.ruta}/registros/nuevos`, {NOMBRE_TIENDA: data}).pipe(
       map( (data: any) => {
-        data.map((registrodb: REGISTRO) => {
-          registrodb.FECHA_VISITA = new Date(registrodb.FECHA_VISITA).toISOString()
-        })
         return data
       })
     )
@@ -30,7 +27,6 @@ export class ServicesService {
   registroInformacion(data: any): Observable <REGISTRO>{
     return this.http.post(`${this.ruta}/registro`, {ID_REGISTRO: data}).pipe(
       map( (data: any) => {
-        data.FECHA_VISITA = new Date(data.FECHA_VISITA).toISOString()
         return data
       })
     )
@@ -38,9 +34,6 @@ export class ServicesService {
   registrosConSeguimiento(data: any){
     return this.http.post(`${this.ruta}/registros`, {ID_USUARIO: data}).pipe(
       map( (data: any) => {
-        data.map((registrodb: REGISTRO) => {
-          registrodb.FECHA_VISITA = new Date(registrodb.FECHA_VISITA).toISOString()
-        })
         return data
       })
     )
@@ -65,6 +58,15 @@ export class ServicesService {
   }
   cargarregistros(data: any){
     return this.http.post(`${this.ruta}/cargar/registros`, data)
+  }
+
+  busquedaEstado(data: any){
+    // /busqueda/estado
+    return this.http.post(`${this.ruta}/busqueda/estado`, {ESTADO: data})
+  }
+  busquedaTerritorio(data: any){
+    // /busqueda/estado
+    return this.http.post(`${this.ruta}/busqueda/territorio`, {TERRITORIO: data})
   }
 
 }

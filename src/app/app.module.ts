@@ -28,6 +28,8 @@ import { LoginComponent } from './login/login.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { VistaEstadoComponent } from './componentes/vistas/vista-estado/vista-estado.component';
+import { VistaTerritorioComponent } from './componentes/vistas/vista-territorio/vista-territorio.component';
 
 const AngularMaterialModule = [
   MatTableModule,
@@ -47,7 +49,9 @@ const AngularMaterialModule = [
     CargaComponent,
     RegistroComponent,
     LoginComponent,
-    PrincipalComponent
+    PrincipalComponent,
+    VistaEstadoComponent,
+    VistaTerritorioComponent
   ],
   imports: [
     BrowserModule,

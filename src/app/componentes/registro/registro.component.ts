@@ -52,8 +52,8 @@ export class RegistroComponent implements OnInit {
   }
   
   DefinirMensajes(){
-    this.mensajeInicio = `¡Gracias por tu preferencia! En Movistar tenemos la mejor opción para renovar tu Smarthphone, SIN PAGO INICIAL y con los mejores descuentos. ven a tu tienda Movistar
-                          ${this.NOMBRE_TIENDA}, mi nombre es ${this.NOMBRE_EJECUTIVO} y te atenderé para realizar tu proceso HOY MISMO.`
+    this.mensajeInicio = `EL smartphone que estabas bsucando te esta esperando!. Acude a tu cac más cercano para que uno de nuestros asesores te brinde la información que necesitas y estrenes con Movistar!
+                          ¡¡¡En Movistar adquiere tu línea de manera segura y sin tener que realizar un pago inicial, llévate el mejor equipoa meses sin intereses y al mejor precio!!!`
 
     this.mensajeRespuestaPositiva =  `¡Muchas gracias por su interés! Le atendere personalmente para que conozca los mejores equipos y nuestros descuentos.
                                      \n ¿En que horario puede acudir el dia de hoy a Movistar ${this.NOMBRE_TIENDA}?`
@@ -62,9 +62,9 @@ export class RegistroComponent implements OnInit {
   }
 
   EnviarMensajeInicio(mensaje: any, status: any){
-    // window.open(
-    //   `https://wa.me/+52${this.Registro.DN}?text=${mensaje}`, "_blank"
-    // )
+    window.open(
+      `https://wa.me/+52${this.Registro.DN}?text=${mensaje}`, "_blank"
+    )
     Swal.fire({
       allowOutsideClick: false,
       title: "¿El mensaje ha sido enviado?",
@@ -144,6 +144,44 @@ export class RegistroComponent implements OnInit {
         this.statusPrimerMensaje = 0
       }
     })
+  }
+
+  cambiarStatus(status: any){
+    Swal.fire({
+      allowOutsideClick: false,
+      title: "¿Continuar con lo solicitado?",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: 'success',
+      cancelButtonColor: 'danger',
+      confirmButtonText: 'Continuar',
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        //CAMBIAMOS STATUS DEL REGISTRO
+        this.service.registroSeguimientoStatus({ID_REGISTRO: this.ID_REGISTRO, STATUS: status}).subscribe(
+          (res)=>{
+            Swal.fire({
+              icon: 'success',
+              title: 'Cambio realizado',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            this.statusRegistro = `${status}`
+          }
+        )
+      }
+    })
+    //RECORDEMOS LOS STATUS QUE MANEJAMOS
+      // [0] SIN CONTACTAR
+      // [1] CONTACTO INICIADO
+      // [0] PENDIENTE
+      // [0] FINALIZADO
+      // [0] DN INCORRECTO
+      // [0] COMPORTAMIENTO AGRESIVO
+
+
   }
 
 }

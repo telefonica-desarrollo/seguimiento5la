@@ -10,7 +10,7 @@ import { ServicesService } from 'src/app/services/services.service';
 })
 export class SeguimientoComponent implements OnInit {
 
-  nombreColumnas= ["dn", "Atencion", "Fecha", "Seguimiento"]
+  nombreColumnas= ["dn", "Atencion", "Fecha","Status", "Seguimiento"]
   ID_TIENDA: any = ""
   ID_USUARIO: any = ""
   cargandoData: boolean = true

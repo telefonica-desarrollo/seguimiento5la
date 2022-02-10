@@ -13,14 +13,15 @@ import { ServicesService } from 'src/app/services/services.service';
 export class NuevosRegistrosComponent implements OnInit {
 
   nombreColumnas= ["dn", "Atencion", "Fecha", "Seguimiento"]
-  ID_TIENDA: any = ""
+  // ID_TIENDA: any = ""
+  NOMBRE_TIENDA: any = ""
   cargandoData: boolean = true
   Registros: REGISTRO [] = []
   
 
   constructor(private service: ServicesService) { 
-    this.ID_TIENDA = localStorage.getItem("ID_TIENDA")
-    this.service.registrosNuevos(this.ID_TIENDA).subscribe((res) => {
+    this.NOMBRE_TIENDA = localStorage.getItem("NOMBRE_TIENDA")
+    this.service.registrosNuevos(this.NOMBRE_TIENDA).subscribe((res) => {
       this.Registros = res;
       console.log(this.Registros);
       this.cargandoData = false

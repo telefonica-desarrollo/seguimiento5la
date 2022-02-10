@@ -9,7 +9,7 @@
                 </dd>
                 <dt class="col-sm-3">Fecha de visita</dt>
                 <dd class="col-sm-9">
-                    {{Registro.FECHA_VISITA | date:"longDate"}}
+                    {{Registro.FECHA_VISITA}}
                 </dd>
                 <dt class="col-sm-3">Nombre</dt>
                 <dd class="col-sm-9">
@@ -27,8 +27,8 @@
                         <mat-option value="1" disabled>Contacto iniciado</mat-option>
                         <mat-option value="2" disabled>Pendiente</mat-option>
                         <mat-option value="3" disabled>Finalizado</mat-option>
-                        <mat-option value="5" disabled>Dn incorrecto</mat-option>
-                        <mat-option value="6" disabled>Comportamiento agresivo</mat-option>
+                        <mat-option value="4" disabled>Dn incorrecto</mat-option>
+                        <mat-option value="5" disabled>Comportamiento agresivo</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -67,7 +67,7 @@
                 </div>
             </mat-expansion-panel>
             <!-- Primer Respuesta -->
-            <mat-expansion-panel [disabled]="statusRegistro<1">
+            <mat-expansion-panel [disabled]="statusRegistro<1 || statusRegistro>3">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         Primer Respuesta
@@ -116,17 +116,33 @@
                 </div>
             </mat-expansion-panel>
             <!-- Finalizar -->
-            <mat-expansion-panel [disabled]="statusRegistro<2">
+            <mat-expansion-panel [disabled]="statusRegistro<2 || statusRegistro>3">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         Finalizar
                     </mat-panel-title>
                     <mat-panel-description>
+                        <div class="text-center" *ngIf="statusRegistro == 3">
+                            <p class="badge bg-danger" style="letter-spacing: 2px;">Finalizado</p>
+                        </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <div class="row">
-                    <div class="col-6">
-
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <h3>Comentarios</h3>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <button class="btn btn-primary d-flex my-3 ms-auto">Guardar</button>
+                    </div>
+                    <hr>
+                    <div class="col-12">
+                        <h3>----</h3>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-secondary" (click)="cambiarStatus(3)">Finalizar conversación</button>
                     </div>
                 </div>
             </mat-expansion-panel>
@@ -137,9 +153,23 @@
                         Levantar reporte
                     </mat-panel-title>
                     <mat-panel-description>
-
+                        <div class="text-center" *ngIf="statusRegistro == 4">
+                            <p class="badge bg-warning" style="letter-spacing: 2px;">Dn incorrecto</p>
+                        </div>
+                        <div class="text-center" *ngIf="statusRegistro == 5">
+                            <p class="badge bg-danger" style="letter-spacing: 2px;">Comportamiento Agresivo</p>
+                        </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <button class="btn btn-warning" [disabled]="statusRegistro!=1" (click)="cambiarStatus(4)">DN incorrecto</button>
+                    </div>
+                    <hr class="my-3">
+                    <div class="col-auto">
+                        <button class="btn btn-danger" (click)="cambiarStatus(5)">Comportamiento Agresivo</button>
+                    </div>
+                </div>
             </mat-expansion-panel>
         </mat-accordion>
     </div>
