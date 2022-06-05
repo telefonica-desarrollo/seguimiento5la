@@ -10,63 +10,63 @@ import { environment } from 'src/environments/environment';
 })
 export class ServicesService {
 
-  constructor(private http: HttpClient ) { }
+  constructor(private http: HttpClient) { }
 
   ruta: string = environment.rutaApi
 
-  login(data: any){
+  login(data: any) {
     return this.http.post(`${this.ruta}/login`, data)
   }
-  registrosNuevos(data: any): Observable <REGISTRO []>{
-    return this.http.post(`${this.ruta}/registros/nuevos`, {NOMBRE_TIENDA: data}).pipe(
-      map( (data: any) => {
+  registrosNuevos(data: any): Observable<REGISTRO[]> {
+    return this.http.post(`${this.ruta}/registros/nuevos`, { NOMBRE_TIENDA: data }).pipe(
+      map((data: any) => {
         return data
       })
     )
   }
-  registroInformacion(data: any): Observable <REGISTRO>{
-    return this.http.post(`${this.ruta}/registro`, {ID_REGISTRO: data}).pipe(
-      map( (data: any) => {
+  registroInformacion(data: any): Observable<REGISTRO> {
+    return this.http.post(`${this.ruta}/registro`, { ID_REGISTRO: data }).pipe(
+      map((data: any) => {
         return data
       })
     )
   }
-  registrosConSeguimiento(data: any){
-    return this.http.post(`${this.ruta}/registros`, {ID_USUARIO: data}).pipe(
-      map( (data: any) => {
+  registrosConSeguimiento(data: any) {
+    return this.http.post(`${this.ruta}/registros`, { ID_USUARIO: data }).pipe(
+      map((data: any) => {
         return data
       })
     )
   }
-  registroIniciarSeguimiento(data: any){
+  registroIniciarSeguimiento(data: any) {
     return this.http.post(`${this.ruta}/registro/iniciar/seguimiento`, data)
   }
-  registroSeguimientoStatus(data: any){
+  registroSeguimientoStatus(data: any) {
     return this.http.post(`${this.ruta}/registro/seguimiento/status`, data)
   }
-  registroSeguimientoPrimerRespuesta(data: any){
+  registroSeguimientoPrimerRespuesta(data: any) {
     return this.http.post(`${this.ruta}/registro/seguimiento/p-respuesta`, data)
   }
-  registroSeguimientoInformacion(data: any){
+  registroSeguimientoInformacion(data: any) {
     return this.http.post(`${this.ruta}/registro/seguimiento/informacion`, data)
   }
-  informacionTienda(data: any){
+  informacionTienda(data: any) {
     return this.http.post(`${this.ruta}/tienda`, data)
   }
-  cargartiendas(data: any){
+  cargartiendas(data: any) {
     return this.http.post(`${this.ruta}/cargar/tiendas`, data)
   }
-  cargarregistros(data: any){
+  cargarregistros(data: any) {
     return this.http.post(`${this.ruta}/cargar/registros`, data)
   }
 
-  busquedaEstado(data: any){
+  busquedaEstado(data: any) {
     // /busqueda/estado
-    return this.http.post(`${this.ruta}/busqueda/estado`, {ESTADO: data})
+    return this.http.post(`${this.ruta}/busqueda/estado`, { ESTADO: data })
   }
-  busquedaTerritorio(data: any){
+  busquedaTerritorio(data: any) {
     // /busqueda/estado
-    return this.http.post(`${this.ruta}/busqueda/territorio`, {TERRITORIO: data})
+    return this.http.post(`${this.ruta}/busqueda/territorio`, { TERRITORIO: data })
   }
 
 }

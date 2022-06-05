@@ -24,27 +24,20 @@ export class LoginComponent implements OnInit {
       text: "Cargando"
     })
     Swal.showLoading();
-
-    this.service.login(this.usuario).subscribe((res: any) => {
-      console.log(res);
-      if(res) {
-        console.log(res);
-        localStorage.clear()
-        localStorage.setItem("ID_TIENDA", res.ID_TIENDA)
-        localStorage.setItem("ID_USUARIO", res.ID_USUARIO)
-        localStorage.setItem("NOMBRE_USUARIO", res.NOMBRE_USUARIO)
-        Swal.close();
-        this.router.navigate(["inicio/registros"])
-      }else {
-        Swal.fire({
-          title: "Error al autenticar",
-          text: "Usuario o contraseña incorrectos.",
-          icon: "error",
-          confirmButtonText: "Ok",
-        })
-      }
+    if(this.usuario.Usuario == "MRT15631" && this.usuario.Password == "Movistar"){
+      localStorage.clear()
+      localStorage.setItem("ID_TIENDA", "Cac Satelite")
+      localStorage.setItem("ID_USUARIO", "MRT15631")
+      localStorage.setItem("NOMBRE_USUARIO", "Juan Luis Perez")
+      this.router.navigate(["inicio/5la/registros"])
+      Swal.close();
+      return
+    }
+    Swal.fire({
+      title: "Error al autenticar",
+      text: "Usuario o contraseña incorrectos.",
+      icon: "error",
+      confirmButtonText: "Ok",
     })
   }
-
-
 }

@@ -1,0 +1,176 @@
+<div class="container">
+    <div class="row my-4 p-2 align-items-center justify-content-around px-3">
+        <div class="col-7 rounded" style="background-color: rgba(0, 0, 0, 0.1);">
+            <h1 class="lead mt-2">Informacion</h1>
+            <dl class="row">
+                <dt class="col-sm-3">Dn:</dt>
+                <dd class="col-sm-9">
+                    {{Registro.DN}}
+                </dd>
+                <dt class="col-sm-3">Fecha de visita</dt>
+                <dd class="col-sm-9">
+                    {{Registro.FECHA_VISITA}}
+                </dd>
+                <dt class="col-sm-3">Nombre</dt>
+                <dd class="col-sm-9">
+                    {{Registro.NOMBRE_CLIENTE}}
+                </dd>
+
+            </dl>
+        </div>
+        <div class="col-5">
+            <div class="row">
+                <mat-form-field appearance="fill">
+                    <mat-label>Status del seguimiento</mat-label>
+                    <mat-select [(value)]="statusRegistro">
+                        <mat-option value="0" disabled>Sin contactar</mat-option>
+                        <mat-option value="1" disabled>Contacto iniciado</mat-option>
+                        <mat-option value="2" disabled>Pendiente</mat-option>
+                        <mat-option value="3" disabled>Finalizado</mat-option>
+                        <mat-option value="4" disabled>Dn incorrecto</mat-option>
+                        <mat-option value="5" disabled>Comportamiento agresivo</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row px-3">
+                <a href="https://wa.me/+52{{Registro.DN}}" class="btn btn-success">Ver conversación</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <mat-accordion>
+            <!-- Iniciar contacto -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Iniciar conversación
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <div *ngIf="statusRegistro > 0">
+                            El cliente ha sido contactado!
+                        </div>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="row mt-2 align-items-center">
+                    <div class="col-4">
+                        <img src="https://image.isu.pub/200910140942-f11811f40c5b929ca8a5df2e980eec11/jpg/page_1.jpg" alt="" class="img-fluid">
+                    </div>
+                    <div class="col-8">
+                        <h1>Iniciar conversación</h1>
+                        <hr>
+                        <p class="lead mb-3">{{mensajeInicio}}
+                        </p>
+                        <button class="btn btn-success shadow d-flex ms-auto px-2" *ngIf="statusRegistro<1" (click)="EnviarMensajeInicio(mensajeInicio, 1)"> Enviar Mensaje</button>
+                        <p class="lead text-muted text-end" *ngIf="statusRegistro > 0">Mensaje enviado...</p>
+                        <hr>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+            <!-- Primer Respuesta -->
+            <mat-expansion-panel [disabled]="statusRegistro<1 || statusRegistro>3">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Primer Respuesta
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        {{statusTextoPrimerMensaje}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="row text-white p-4 rounded" style="background-color: rgba(0, 0, 0, 0.8); ">
+                    <div class="col lead ">
+                        Respuesta del cliente:
+                    </div>
+                    <div class="col ">
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox1" (change)="PimerRespuesta()" [(ngModel)]="statusPrimerMensaje" [value]="2" [disabled]="statusPrimerMensaje==1">
+                            <label class="form-check-label " for="inlineCheckbox1 ">Positiva</label>
+                        </div>
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox2 " (change)="PimerRespuesta()" [(ngModel)]=" statusPrimerMensaje" [value]="1" [disabled]="statusPrimerMensaje==2">
+                            <label class="form-check-label " for="inlineCheckbox2 ">Negativa</label>
+                        </div>
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input " type="radio" name="inlineRadioOptions " id="inlineCheckbox3 " (change)="PimerRespuesta()" [(ngModel)]=" statusPrimerMensaje" [value]="0" [disabled]="statusPrimerMensaje>0">
+                            <label class="form-check-label " for="inlineCheckbox3 ">Sin respuesta</label>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mt-2" *ngIf="statusPrimerMensaje==1">
+                    <div class="col-12 my-3">
+                        {{mensajeRespuestaNegativa}}
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-success shadow d-flex ms-auto px-2" *ngIf="statusRegistro<2" (click)="EnviarMensajeInicio(mensajeRespuestaNegativa, 2)"> Enviar Mensaje</button>
+                        <p class="lead text-muted text-end" *ngIf="statusRegistro > 1">Mensaje enviado...</p>
+                    </div>
+                </div>
+                <div class="row mt-2" *ngIf="statusPrimerMensaje==2">
+                    <div class="col-12 my-3">
+                        {{mensajeRespuestaPositiva}}
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-success shadow d-flex ms-auto px-2" *ngIf="statusRegistro<2" (click)="EnviarMensajeInicio(mensajeRespuestaPositiva, 2)"> Enviar Mensaje</button>
+                        <p class="lead text-muted text-end" *ngIf="statusRegistro > 1">Mensaje enviado...</p>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+            <!-- Finalizar -->
+            <mat-expansion-panel [disabled]="statusRegistro<2 || statusRegistro>3">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Finalizar
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <div class="text-center" *ngIf="statusRegistro == 3">
+                            <p class="badge bg-danger" style="letter-spacing: 2px;">Finalizado</p>
+                        </div>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <h3>Comentarios</h3>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <button class="btn btn-primary d-flex my-3 ms-auto">Guardar</button>
+                    </div>
+                    <hr>
+                    <div class="col-12">
+                        <h3>----</h3>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-secondary" (click)="cambiarStatus(3)">Finalizar conversación</button>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+            <!-- Levantar reporte -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Levantar reporte
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <div class="text-center" *ngIf="statusRegistro == 4">
+                            <p class="badge bg-warning" style="letter-spacing: 2px;">Dn incorrecto</p>
+                        </div>
+                        <div class="text-center" *ngIf="statusRegistro == 5">
+                            <p class="badge bg-danger" style="letter-spacing: 2px;">Comportamiento Agresivo</p>
+                        </div>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <button class="btn btn-warning" [disabled]="statusRegistro!=1" (click)="cambiarStatus(4)">DN incorrecto</button>
+                    </div>
+                    <hr class="my-3">
+                    <div class="col-auto">
+                        <button class="btn btn-danger" (click)="cambiarStatus(5)">Comportamiento Agresivo</button>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>
